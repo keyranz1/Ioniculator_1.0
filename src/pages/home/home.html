@@ -1,17 +1,68 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Home</ion-title>
+    <ion-title>Tips</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+<ion-content padding class="tipsPage">
+  <ion-card>
+    <ion-item class="redFont">
+      <ion-label position="fixed">Amount : </ion-label>
+      <ion-input type="number" placeholder="How much was for food?" [(ngModel)]="billAmount"></ion-input>
+    </ion-item>
+  </ion-card>
+
+  <ion-card>
+    <ion-item class="redFont">
+      <ion-avatar item-start>
+        <img src="/assets/icon/food1.png">
+      </ion-avatar>
+      <h2 style="margin-left:5%">How good was the food?</h2>
+    </ion-item>
+
+    <ion-range min="0" max="100" step="2" value="happiness" [(ngModel)]="happiness" color="default">
+      <ion-icon range-left name="sad" style="color:red;"></ion-icon>
+      <ion-icon range-right name="happy" style="color:orange;"></ion-icon>
+    </ion-range>
+
+    <ion-item class="redFont" style="border-top: 1px solid lightgray">
+      <ion-avatar item-start>
+        <img src="/assets/icon/service1.png">
+      </ion-avatar>
+      <h2 style="margin-left:5%">How was the service?</h2>
+    </ion-item>
+    <ion-item class="redFont">
+      <ion-label>Service was </ion-label>
+      <ion-select style="width: 100%;" value="good" interface="action-sheet" [(ngModel)]="servicerate" (change)="ServiceOption(servicerate)" okText="Ok" cancelText="Dismiss">
+        <ion-option value="outstanding">Outstanding</ion-option>
+        <ion-option value="great" >Very Great</ion-option>
+        <ion-option value="best">Best</ion-option>
+        <ion-option value="good">Good</ion-option>
+        <ion-option value="nice">Nice</ion-option>
+        <ion-option value="alright">Alright</ion-option>
+        <ion-option value="bad">Bad</ion-option>
+        <ion-option value="poor">Poor</ion-option>
+        <ion-option value="worst">Worst</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-card>
+  <ion-card no-padding>
+   <ion-item class="redFont card3">
+     <ion-label>Tip %</ion-label>
+     <ion-icon name="cash" item-start></ion-icon>
+   </ion-item>
+    <ion-item class="redFont card3 borderTweak">
+      <ion-label>People #</ion-label>
+      <ion-icon name="people" item-start></ion-icon>
+    </ion-item>
+    <ion-item class="redFont card3" >
+      <ion-input type="number"></ion-input>
+    </ion-item>
+    <ion-item class="redFont card3 borderTweak" >
+      <ion-input type="number"></ion-input>
+    </ion-item>
+  </ion-card>
+
+  <button ion-button style="width:70%; margin-left: 15%" color="default" (click)="GetTipAmount()">Get the tip amount</button>
+
 </ion-content>
