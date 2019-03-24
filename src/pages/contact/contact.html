@@ -1,17 +1,40 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Contact
+      Calculator
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content>
-  <ion-list>
-    <ion-list-header>Follow us on Twitter</ion-list-header>
-    <ion-item>
-      <ion-icon name="ionic" item-start></ion-icon>
-      @ionicframework
-    </ion-item>
-  </ion-list>
+<ion-content class="calcPage" no-padding="">
+  <div class="summaryScreen">
+    <p>200</p>
+  </div>
+  <div class="calButtons">
+    <div ion-row>
+      <button ion-button ion-col>1</button>
+      <button ion-button ion-col>2</button>
+      <button ion-button ion-col>3</button>
+      <button ion-button ion-col>C</button>
+    </div>
+    <div ion-row>
+      <button ion-button ion-col>4</button>
+      <button ion-button ion-col>5</button>
+      <button ion-button ion-col>6</button>
+      <button ion-button ion-col>+</button>
+    </div>
+    <div ion-row>
+      <button ion-button ion-col>7</button>
+      <button ion-button ion-col>8</button>
+      <button ion-button ion-col>9</button>
+      <button ion-button ion-col>-</button>
+    </div>
+    <div ion-row>
+      <button ion-button ion-col>/</button>
+      <button ion-button ion-col>0</button>
+      <button ion-button ion-col>*</button>
+      <button ion-button ion-col>=</button>
+    </div>
+  </div>
+  <button></button>
 </ion-content>

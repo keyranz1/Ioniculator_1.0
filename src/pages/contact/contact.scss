@@ -1,3 +1,27 @@
 page-contact {
 
 }
+.calcPage{
+  background: linear-gradient(100deg,#3dc1d3, #63cdda);
+  .summaryScreen{
+    height: 30%;
+    width: 100%;
+    background-color: white ;
+    font-size: 150%;
+  }
+}
+.calButtons{
+  height: 70%;
+  width: 100%;
+
+  div{
+    height: 25%;
+    button {
+      height: 100% !important;
+      background: #3dc1d3;
+      color: white;
+      border: 1px solid white;
+      font-size: 250%;
+    }
+  }
+}
