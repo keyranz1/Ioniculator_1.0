@@ -14,3 +14,8 @@
 .borderTweak{
   border-left: 1px solid lightgrey;
 }
+.amountError{
+  > div{
+    background-color: #c23616 !important;
+  }
+}

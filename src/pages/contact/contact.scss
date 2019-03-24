@@ -7,7 +7,7 @@ page-contact {
     height: 30%;
     width: 100%;
     background-color: white ;
-    font-size: 150%;
+    //font-size: 150%;
   }
 }
 .calButtons{
@@ -24,4 +24,10 @@ page-contact {
       font-size: 250%;
     }
   }
+
+  button.equalsBtn{
+    background: #218c74;
+  }
 }
+
+
