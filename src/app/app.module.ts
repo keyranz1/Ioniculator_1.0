@@ -10,7 +10,6 @@ import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { ChartsModule } from 'ng2-charts-x';
 
 @NgModule({
   declarations: [
@@ -22,8 +21,7 @@ import { ChartsModule } from 'ng2-charts-x';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
-    ChartsModule
+    IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
   entryComponents: [

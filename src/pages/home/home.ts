@@ -7,11 +7,12 @@ import { Chart } from 'chart.js';
   templateUrl: 'home.html'
 })
 export class HomePage {
-  bill: number;
+  billAmount: number;
   happiness: number;
   servicerate: any = 'nice';
   tipPercent: number;
   numOfPerson: number;
+  tipAmount: number;
 
   @ViewChild('doughnutCanvas') doughnutCanvas;
   doughnutChart: any;
@@ -21,20 +22,15 @@ export class HomePage {
 
   }
 
-  newInput(billAmt){
-    this.bill = billAmt;
-  }
-
-  showChart(billAmount,tipPercent){
-    this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement,{
+  showChart(billAmt,tipPercent){
+      this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement,{
         type: 'doughnut',
-        data:
-          {
+        data: {
           labels: ['Bill','Tips'],
           datasets:
           [{
             label: 'Summary',
-            data: [this.bill, ((tipPercent/100)*billAmount)],
+            data: [billAmt, ((tipPercent/100)*billAmt)],
             backgroundColor:
             [
               'rgba(255, 99, 132, 0.2)',
@@ -49,16 +45,14 @@ export class HomePage {
         }
       });
   }
-
-  //This might be used in future versions
   // public chartLabel: string[]=['Bill','Tips'];
-  // public chartData: number[]=[this.bill,(this.bill*(this.tipPercent/100))];
+  // public chartData: number[]=[this.billAmount,this.billAmount*(this.tipPercent/100)];
   // public chartType: string = 'doughnut';
 
   GetTipAmount(){
 
-    if(this.bill > 0) {
-      this.showChartPage();
+    if(this.billAmount >= 0) {
+      this.showChart(this.billAmount,this.tipPercent);
       document.getElementById("myNav").style.width = "100%";
     } else {
       this.toastCtrl.create({
@@ -70,19 +64,16 @@ export class HomePage {
     if(this.servicerate != undefined){
       console.log(this.servicerate);
     }
-  }
-
-  showChartPage(){
-    let billAmt = this.bill;
-    let tipPct = this.tipPercent;
-    this.showChart(billAmt,tipPct);
-
+    console.log(this.tipPercent);
+    console.log(this.numOfPerson);
   }
 
   closeNav() {
     document.getElementById("myNav").style.width = "0%";
-    //refreshes the chart js data
-    this.navCtrl.setRoot(this.navCtrl.getActive().component);
+  }
+
+  calculateTip(amt,percent){
+    return (amt*(percent/100)).toFixed(2);
   }
 
   HappinessRange($event) {
