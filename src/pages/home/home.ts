@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import {AlertController, NavController, ToastController} from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, AlertController, ToastController} from 'ionic-angular';
+import { Chart } from 'chart.js';
 
 @Component({
   selector: 'page-home',
@@ -9,21 +10,50 @@ export class HomePage {
   billAmount: number;
   happiness: number;
   servicerate: any = 'nice';
-  tipPercent: number = 15;
-  numOfPerson: number = 1;
+  tipPercent: number;
+  numOfPerson: number;
   tipAmount: number;
+
+  @ViewChild('doughnutCanvas') doughnutCanvas;
+  doughnutChart: any;
+
   constructor(public navCtrl: NavController, public alertCtrl: AlertController,
               public toastCtrl: ToastController) {
 
   }
 
+  showChart(billAmt,tipPercent){
+      this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement,{
+        type: 'doughnut',
+        data: {
+          labels: ['Bill','Tips'],
+          datasets:
+          [{
+            label: 'Summary',
+            data: [billAmt, ((tipPercent/100)*billAmt)],
+            backgroundColor:
+            [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(54, 162, 235, 0.2)'
+            ],
+            hoverBackgroundColor:
+            [
+              "#FF6384",
+              "#36A2EB"
+            ]
+          }]
+        }
+      });
+  }
+  // public chartLabel: string[]=['Bill','Tips'];
+  // public chartData: number[]=[this.billAmount,this.billAmount*(this.tipPercent/100)];
+  // public chartType: string = 'doughnut';
+
   GetTipAmount(){
+
     if(this.billAmount >= 0) {
-      this.alertCtrl.create({
-        title: 'Tip',
-        message: 'This is the tip amount' + this.calculateTip(this.billAmount,this.tipPercent),
-        buttons: ['Ok']
-      }).present();
+      this.showChart(this.billAmount,this.tipPercent);
+      document.getElementById("myNav").style.width = "100%";
     } else {
       this.toastCtrl.create({
         message: 'Enter the bill amount please.',
@@ -38,8 +68,12 @@ export class HomePage {
     console.log(this.numOfPerson);
   }
 
+  closeNav() {
+    document.getElementById("myNav").style.width = "0%";
+  }
+
   calculateTip(amt,percent){
-    return this.billAmount*(this.tipPercent/100);
+    return (amt*(percent/100)).toFixed(2);
   }
 
   HappinessRange($event) {

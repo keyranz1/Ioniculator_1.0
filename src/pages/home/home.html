@@ -5,6 +5,19 @@
 </ion-header>
 
 <ion-content padding class="tipsPage">
+
+  <div id="myNav" class="overlay">
+    <ion-card class="overlay-content">
+      <ion-card-header>
+        Doughnut Chart
+        <a class="closebtn" (click)="closeNav()">&times;</a>
+      </ion-card-header>
+      <ion-card-content>
+        <canvas #doughnutCanvas></canvas>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
   <ion-card>
     <ion-item class="redFont">
       <ion-label position="fixed">Amount : </ion-label>
