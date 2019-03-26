@@ -15,7 +15,31 @@
       <ion-card-content>
         <canvas #doughnutCanvas></canvas>
       </ion-card-content>
+      <ion-card style="border: 2px solid #1abc9c" padding>
+        <ion-card-header>Tip Summary</ion-card-header>
+        <ion-card-content>
+         <p id="pFood" align-items-start>✅ </p>
+         <p id="pService">✅ Service was </p>
+          <hr>
+          <p></p>
+          <div style="text-align: start; border-bottom: 1.5px dotted black; width: 60%;float: right">
+            <div style="float: left; width: 100%;">
+              <h2 style="float: left">Price: </h2><h2 style="float: right; font-weight: bold">$ {{bill}}</h2>
+            </div>
+            <div style="width:100%;">
+              <h2 style="float: left">Tip: @{{tipPercent}}% </h2><h2 style="float: right; font-weight: bolder">$ {{tipAmount}}</h2>
+            </div>
+          </div>
+          <div style="text-align: start; width: 60%;float: right; margin-top: 2%;">
+            <!--need to fix this total bill-->
+            <h2 style="float: left">Total: </h2><h2 style="float: right; font-weight: bold">$ {{totalBill}}</h2>
+          </div>
+        </ion-card-content>
+      </ion-card>
+      <p>🍽️ Hope you enjoyed the meal... 😊</p>
+      <p>🍔🍟🍕🌮🍲🥡🍷</p>
     </ion-card>
+
   </div>
 
   <ion-card>
@@ -33,7 +57,7 @@
       <h2 style="margin-left:5%">How good was the food?</h2>
     </ion-item>
 
-    <ion-range min="0" max="100" step="2" value="happiness" [(ngModel)]="happiness" (ngModelChange)="HappinessRange($event)" color="default">
+    <ion-range min="0" max="100" step="20" value="happiness" [(ngModel)]="happiness" (ngModelChange)="HappinessRange($event)" color="default">
       <ion-icon range-left name="sad" style="color:red;"></ion-icon>
       <ion-icon range-right name="happy" style="color:orange;"></ion-icon>
     </ion-range>

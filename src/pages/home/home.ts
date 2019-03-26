@@ -8,10 +8,12 @@ import { Chart } from 'chart.js';
 })
 export class HomePage {
   bill: number;
+  totalBill: number;
   happiness: number;
   servicerate: any = 'nice';
   tipPercent: number;
   numOfPerson: number;
+  tipAmount: number;
 
   @ViewChild('doughnutCanvas') doughnutCanvas;
   doughnutChart: any;
@@ -25,7 +27,7 @@ export class HomePage {
     this.bill = billAmt;
   }
 
-  showChart(billAmount,tipPercent){
+  showChart(billAmount,tipAmount){
     this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement,{
         type: 'doughnut',
         data:
@@ -34,7 +36,7 @@ export class HomePage {
           datasets:
           [{
             label: 'Summary',
-            data: [this.bill, ((tipPercent/100)*billAmount)],
+            data: [billAmount, tipAmount],
             backgroundColor:
             [
               'rgba(255, 99, 132, 0.2)',
@@ -49,11 +51,17 @@ export class HomePage {
         }
       });
   }
-
+  showChartPage(){
+    this.calculateTip();
+    let billAmt = this.bill;
+    let tipAmt = this.tipAmount;
+    this.showChart(billAmt,tipAmt);
+  }
   GetTipAmount(){
-
     if(this.bill > 0) {
       this.showChartPage();
+      this.foodRateHtmlAppend();
+      this.foodServiceHtmlAppend();
       document.getElementById("myNav").style.width = "100%";
     } else {
       this.toastCtrl.create({
@@ -62,9 +70,6 @@ export class HomePage {
         cssClass: 'amountError'
       }).present();
     }
-    if(this.servicerate != undefined){
-      console.log(this.servicerate);
-    }
   }
 
   closeNav() {
@@ -72,18 +77,48 @@ export class HomePage {
     this.navCtrl.setRoot(this.navCtrl.getActive().component);
   }
 
-  showChartPage(){
-    let billAmt = this.bill;
-    let tipPct = this.tipPercent;
-    this.showChart(billAmt,tipPct);
-
-  }
+  foodRate: number[] = [];
 
   HappinessRange($event) {
+    this.foodRate.push($event);
     this.happiness = $event;
-    console.log(this.happiness);
-    if (this.happiness < 20) {
-      console.log('The food was bad');
+    console.log(this.foodRate);
+  }
+
+  foodRateHtmlAppend(){
+    var paragraph = document.getElementById("pFood");
+    var text;
+    switch (this.foodRate[this.foodRate.length-1]){
+      case 0:
+        text = document.createTextNode("Its shit for sure.")
+      case 20:
+        text = document.createTextNode("Food was alright.");
+        break;
+      case 40:
+        text = document.createTextNode("Food was great.");
+        break;
+      case 60:
+        text = document.createTextNode("Food was very great.");
+        break;
+      case 80:
+        text = document.createTextNode("Food was awesome.");
+        break;
+      case 100:
+        text = document.createTextNode("Food was outstanding.");
+        break;
+      default:
+        text = document.createTextNode("Lovely Weekend.");
     }
+    paragraph.appendChild(text);
+  }
+  foodServiceHtmlAppend(){
+    var paragraph = document.getElementById("pService");
+    var text = document.createTextNode(this.servicerate);
+    paragraph.appendChild(text);
+  }
+
+  calculateTip(){
+    this.tipAmount = parseInt((this.bill*(this.tipPercent/100)).toFixed(2));
+    this.totalBill = (this.tipAmount + this.bill);
   }
 }
