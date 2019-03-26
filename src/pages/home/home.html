@@ -21,7 +21,7 @@
   <ion-card>
     <ion-item class="redFont">
       <ion-label position="fixed">Amount : </ion-label>
-      <ion-input type="number" placeholder="How much was for food?" [(ngModel)]="billAmount"></ion-input>
+      <ion-input type="number" placeholder="How much was for food?" [(ngModel)]="billAmount" (change)="newInput(billAmount)"></ion-input>
     </ion-item>
   </ion-card>
 

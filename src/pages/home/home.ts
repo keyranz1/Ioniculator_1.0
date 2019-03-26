@@ -7,12 +7,11 @@ import { Chart } from 'chart.js';
   templateUrl: 'home.html'
 })
 export class HomePage {
-  billAmount: number;
+  bill: number;
   happiness: number;
   servicerate: any = 'nice';
   tipPercent: number;
   numOfPerson: number;
-  tipAmount: number;
 
   @ViewChild('doughnutCanvas') doughnutCanvas;
   doughnutChart: any;
@@ -22,15 +21,20 @@ export class HomePage {
 
   }
 
-  showChart(billAmt,tipPercent){
-      this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement,{
+  newInput(billAmt){
+    this.bill = billAmt;
+  }
+
+  showChart(billAmount,tipPercent){
+    this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement,{
         type: 'doughnut',
-        data: {
+        data:
+          {
           labels: ['Bill','Tips'],
           datasets:
           [{
             label: 'Summary',
-            data: [billAmt, ((tipPercent/100)*billAmt)],
+            data: [this.bill, ((tipPercent/100)*billAmount)],
             backgroundColor:
             [
               'rgba(255, 99, 132, 0.2)',
@@ -45,14 +49,11 @@ export class HomePage {
         }
       });
   }
-  // public chartLabel: string[]=['Bill','Tips'];
-  // public chartData: number[]=[this.billAmount,this.billAmount*(this.tipPercent/100)];
-  // public chartType: string = 'doughnut';
 
   GetTipAmount(){
 
-    if(this.billAmount >= 0) {
-      this.showChart(this.billAmount,this.tipPercent);
+    if(this.bill > 0) {
+      this.showChartPage();
       document.getElementById("myNav").style.width = "100%";
     } else {
       this.toastCtrl.create({
@@ -64,8 +65,6 @@ export class HomePage {
     if(this.servicerate != undefined){
       console.log(this.servicerate);
     }
-    console.log(this.tipPercent);
-    console.log(this.numOfPerson);
   }
 
   closeNav() {
@@ -73,8 +72,11 @@ export class HomePage {
     this.navCtrl.setRoot(this.navCtrl.getActive().component);
   }
 
-  calculateTip(amt,percent){
-    return (amt*(percent/100)).toFixed(2);
+  showChartPage(){
+    let billAmt = this.bill;
+    let tipPct = this.tipPercent;
+    this.showChart(billAmt,tipPct);
+
   }
 
   HappinessRange($event) {
