@@ -70,6 +70,7 @@ export class HomePage {
 
   closeNav() {
     document.getElementById("myNav").style.width = "0%";
+    this.navCtrl.setRoot(this.navCtrl.getActive().component);
   }
 
   calculateTip(amt,percent){
